@@ -26,17 +26,24 @@ var PRODUCTION = process.env.NODE_ENV === 'production';
 
 // ---------------------------------------------------
 // tasks
-gulp.task('lint', function () {
-  gulp.src('./client/**/*.js')
+gulp.task('lint-client', function () {
+  gulp.src(['./client/**/*.js'])
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
     .pipe(jshint.reporter('fail'))
-    .on('error', notify.onError({ message: 'JS hint fail'}));
-    // .pipe(jshint.reporter('fail'));
+    .on('error', notify.onError({ message: 'JS hint client fail'}));
+});
+
+gulp.task('lint-server', function () {
+  gulp.src(['./lib/server/**/*.js'])
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'))
+    .pipe(jshint.reporter('fail'))
+    .on('error', notify.onError({ message: 'JS hint server fail'}));
 });
 
 gulp.task('clean', function () {
-  del(['./lib/client-build/*']);
+  return del.sync(['./lib/client-build/*']);
 });
 
 gulp.task('styles', function() {
@@ -59,7 +66,7 @@ gulp.task('copy-img-files', function () {
     .pipe(gulp.dest('./lib/client-build/img/'));
 });
 
-gulp.task('browserify', ['lint'], function() {
+gulp.task('browserify', ['lint-client'], function() {
   gulp.src(['./client/index.js'])
   .pipe(browserify({
     insertGlobals: true,
@@ -94,7 +101,7 @@ gulp.task('default', function () {
 // build task
 gulp.task('build', function () {
   runSequence(
-    ['lint'],
+    ['lint-client'],
     ['clean'],
     ['browserify', 'styles', 'copy-html-files', 'copy-img-files']
   );
@@ -103,8 +110,10 @@ gulp.task('build', function () {
 // watch task
 gulp.task('watch', ['js-watcher', 'less-watcher']);
 
+//add watch for server!!!
+
 // Start server
-gulp.task('server', function() {
+gulp.task('server', ['lint-server'], function() {
     nodemon({
         script: 'lib/server/index.js',
         watch: ["lib/server/*"],
