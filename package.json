@@ -1,0 +1,52 @@
+{
+  "name": "mean-photo-gallery",
+  "version": "1.0.0",
+  "description": "MEAN stack photo viewer with ability to upload photo",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "gulp",
+    "build": "gulp build",
+    "server": "node lib/server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/okachynskyy/mean-photo-gallery.git"
+  },
+  "keywords": [
+    "JavaScript",
+    "Angular",
+    "Node.js",
+    "Express.js",
+    "MongoDB",
+    "MEAN",
+    "Bootstrap"
+  ],
+  "author": "Oleksiy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/okachynskyy/mean-photo-gallery/issues"
+  },
+  "homepage": "https://github.com/okachynskyy/mean-photo-gallery#readme",
+  "devDependencies": {
+    "brfs": "^1.4.3",
+    "del": "^2.2.1",
+    "gulp": "^3.9.1",
+    "gulp-browserify": "^0.5.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-jshint": "^2.0.1",
+    "gulp-if": "^2.0.1",
+    "gulp-less": "^3.1.0",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-nodemon": "^2.1.0",
+    "gulp-notify": "^2.2.0",
+    "gulp-uglify": "^1.5.4",
+    "jshint": "^2.9.2",
+    "run-sequence": "^1.2.2"
+  },
+  "dependencies": {
+    "angular": "^1.5.7",
+    "angular-route": "^1.5.7",
+    "bootstrap": "^3.3.6",
+    "express": "^4.14.0"
+  }
+}
