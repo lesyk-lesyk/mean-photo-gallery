@@ -1,2 +1,24 @@
-<h1>Gallery component</h1>
-<button ng-click="$ctrl.testCtrl()">test</button>
+<h1>Gallery</h1>
+
+<form name="up.upload_form">
+  <input 
+    type="file" 
+    ngf-select 
+    ng-model="up.file" 
+    name="file" 
+    ngf-pattern="'image/*'"
+    accept="image/*" 
+    ngf-max-size="20MB" 
+    required 
+  />
+  Image thumbnail: <img style="width:100px;" ngf-thumbnail="up.file || '/img/thumb.png'"/>
+  <i ng-show="up.upload_form.file.$error.required">*required</i><br>
+  <i ng-show="up.upload_form.file.$error.maxSize">File too large 
+    {{up.file.size / 1000000|number:1}}MB: max 20M</i>
+  <button type="submit" ng-click="up.submit()">submit</button>
+  <p>{{up.progress}}</p>
+</form>
+
+<div >
+  <img ng-repeat="picture in up.allPicturesInfo()" ng-src="{{ picture.path }}" alt="" class="img">
+</div>

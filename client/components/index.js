@@ -4,6 +4,7 @@ var ngRoute = require('angular-route');
 var gallery = require('./gallery');
 
 module.exports = angular.module('photoGallery', [
+  require('ng-file-upload'),
   ngRoute,
   gallery,
 ]).

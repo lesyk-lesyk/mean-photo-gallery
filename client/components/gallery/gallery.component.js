@@ -2,16 +2,40 @@ var fs = require('fs');
 
 module.exports = {
   controller: GalleryController,
+  controllerAs: 'up',
   template: fs.readFileSync(__dirname + '/gallery.component.html', 'utf-8')
 };
 
-GalleryController.$inject = ['Gallery'];
-function GalleryController(Gallery) {
+GalleryController.$inject = ['Gallery', 'Upload'];
+function GalleryController(Gallery, Upload) {
   var $ctrl = this;
   
-  console.log(Gallery.testFactory());
+  $ctrl.allPicturesInfo = Gallery.getAllPicturesInfo;
 
-  $ctrl.testCtrl = function () {
-    console.log('testCtrl');
+  Gallery.fetchAllPicturesInfo();
+
+  $ctrl.submit = function(){ 
+    $ctrl.upload($ctrl.file);
   };
+
+  $ctrl.upload = function (file) {
+    Upload.upload({
+      url: '/api/gallery/upload',
+      data: { file:file } 
+    }).then(function (resp) { 
+      if(resp.data.error_code === 0){ 
+        console.log('Success: "' + resp.config.data.file.name + '" uploaded.');
+        Gallery.fetchAllPicturesInfo();
+      } else {
+        console.log('Error:', resp);
+      }
+    }, function (resp) { 
+      console.log('Error status: ' + resp.status);
+    }, function (evt) { 
+      var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+      $ctrl.progress = 'progress: ' + progressPercentage + '% ';
+    });
+  };
+
 }
+

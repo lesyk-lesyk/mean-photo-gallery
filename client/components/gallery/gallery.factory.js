@@ -2,13 +2,25 @@ module.exports = GalleryFactory;
 
 GalleryFactory.$inject = ['$http'];
 function GalleryFactory($http) {
- 
-  function testFactory () {
-    return 'testFactory';
+  var allPicturesInfo = [];
+
+  function fetchAllPicturesInfo () {
+    allPicturesInfo = [];
+    return $http.get('/api/gallery/pictures')
+    .then(function(response) {
+      response.data.forEach(function(picture){
+        allPicturesInfo.push(picture);
+      });
+    });
+  }
+
+  function getAllPicturesInfo() {
+    return allPicturesInfo;
   }
 
   return {
-    testFactory: testFactory
+    fetchAllPicturesInfo: fetchAllPicturesInfo,
+    getAllPicturesInfo: getAllPicturesInfo
   };
 
 }
