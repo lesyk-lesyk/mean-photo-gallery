@@ -15,6 +15,7 @@ var less = require('gulp-less');
 var nodemon = require('gulp-nodemon');
 var notify = require('gulp-notify');
 var gulpif = require('gulp-if');
+var plumber = require('gulp-plumber');
 
 // for nodemon
 process.once('SIGINT', function(){
@@ -68,6 +69,16 @@ gulp.task('copy-img-files', function () {
 
 gulp.task('browserify', ['lint-client'], function() {
   gulp.src(['./client/index.js'])
+  .pipe(plumber({
+    errorHandler: function(err){
+      notify.onError({
+        title:    "Gulp",
+        subtitle: "Failure!",
+        message:  "Error: <%= error.message %>",
+      })(err);
+      this.emit('end');
+    }
+  }))
   .pipe(browserify({
     insertGlobals: true,
     debug: true,
