@@ -18,9 +18,18 @@ function GalleryFactory($http) {
     return allPicturesInfo;
   }
 
+  function removePicture(id) {
+    return $http.delete('/api/gallery/remove/' + id)
+    .then(function(response) {
+      console.log(response.data);
+      fetchAllPicturesInfo();
+    });
+  }
+
   return {
     fetchAllPicturesInfo: fetchAllPicturesInfo,
-    getAllPicturesInfo: getAllPicturesInfo
+    getAllPicturesInfo: getAllPicturesInfo,
+    removePicture: removePicture
   };
 
 }

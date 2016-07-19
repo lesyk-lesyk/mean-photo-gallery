@@ -14,14 +14,20 @@ function GalleryController(Gallery, Upload) {
 
   Gallery.fetchAllPicturesInfo();
 
-  $ctrl.submit = function(){ 
-    $ctrl.upload($ctrl.file);
+  $ctrl.progress = 0;
+
+  $ctrl.remove = function (id) {
+    Gallery.removePicture(id);
   };
 
-  $ctrl.progress = 0;
-  
   $ctrl.getProgress = function () {
     return $ctrl.progress;
+  };
+
+  $ctrl.submit = function(){
+    if ($ctrl.file) {
+      $ctrl.upload($ctrl.file);
+    }
   };
 
   $ctrl.upload = function (file) {

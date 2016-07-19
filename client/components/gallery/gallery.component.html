@@ -31,7 +31,7 @@
 
           <div class="col-xs-4 col-md-2 text-center">
             Drag here: <br />
-            <img style="height:80px;" ng-src="/img/trash.png"/>
+            <img dd-drop-target="true" style="height:80px;" ng-src="/img/trash.png"/>
           </div>
         </form>
       </div>
@@ -54,7 +54,7 @@
 <div class="photo-row">
   <div class="panel panel-default" ng-repeat="picture in up.allPicturesInfo()">
     <div class="panel-body">
-      <img class="img-responsive" ng-src="{{ picture.path }}" alt="">
+      <img class="img-responsive" ng-src="{{ picture.path }}" alt="" dd-draggable="true" itemid="{{picture.id}}">
     </div>
   </div>
 </div>
