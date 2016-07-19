@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+- '6.2.1'
+install: npm install
+before_script: NODE_ENV=production npm run build
+branches:
+  only:
+    - master
+deploy:
+  provider: heroku
+  api_key: 5f141b0d-f9d4-44fb-9533-52afc5c490a6
+  app: mean-photo-gallery
+  
