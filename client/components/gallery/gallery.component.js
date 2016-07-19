@@ -18,6 +18,12 @@ function GalleryController(Gallery, Upload) {
     $ctrl.upload($ctrl.file);
   };
 
+  $ctrl.progress = 0;
+  
+  $ctrl.getProgress = function () {
+    return $ctrl.progress;
+  };
+
   $ctrl.upload = function (file) {
     Upload.upload({
       url: '/api/gallery/upload',
@@ -33,7 +39,7 @@ function GalleryController(Gallery, Upload) {
       console.log('Error status: ' + resp.status);
     }, function (evt) { 
       var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-      $ctrl.progress = 'progress: ' + progressPercentage + '% ';
+      $ctrl.progress = progressPercentage;
     });
   };
 
