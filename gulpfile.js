@@ -135,3 +135,12 @@ gulp.task('server', ['lint-server'], function() {
       .pipe(notify('Server restarted'));
   });
 });
+
+
+
+var fs = require('fs');
+var dir = './lib/uploads';
+
+if (!fs.existsSync(dir)){
+    fs.mkdirSync(dir);
+}
