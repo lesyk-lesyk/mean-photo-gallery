@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MEAN photo gallery">
+  <meta name="author" content="Oleksiy Kachynskyy">
+  <title>MEAN photo gallery</title>
+  <link rel="shortcut icon" href="/img/favicon.ico">
+
+  <!-- styles -->
+  <link rel="stylesheet" href="/css/bundled.css"/>
+</head>
+<body>
+  <main id="main-content" class="container">
+    <div ng-view></div>
+  </main>
+
+  <!-- scripts -->
+  <script src="/js/bundled.js"></script>
+  <script type="text/javascript">
+      angular.bootstrap(document, ['photoGallery'], { strictDi: true });
+  </script>
+</body>
+</html>

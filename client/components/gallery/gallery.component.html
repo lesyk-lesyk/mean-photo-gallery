@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col-xs-12">
+
+    <div class="row">
+      <div class="col-xs-12">
+        <h1 class="page-header text-center">Thumbnail Gallery</h1>
+        <form name="up.upload_form" class="form-horizontal" role="form">
+          <div class="col-xs-4 col-md-2 col-md-offset-3 text-center">
+            Preview: <br />
+            <img style="height:80px;" ngf-thumbnail="up.file || '/img/thumb.png'"/>
+          </div>
+
+          <div class="col-xs-4 col-md-2 text-center">
+            <label class="btn btn-default btn-file">
+              Browse 
+              <input 
+              type="file" 
+              ngf-select 
+              ng-model="up.file" 
+              name="file" 
+              ngf-pattern="'image/*'"
+              accept="image/*" 
+              ngf-max-size="20MB" 
+              required 
+              style="display: none;"
+              />
+            </label> 
+            <br/><br/>
+            <button type="submit" ng-click="up.submit()" class="btn btn-primary">Upload</button>
+          </div>
+
+          <div class="col-xs-4 col-md-2 text-center">
+            Drag here: <br />
+            <img dd-drop-target="true" style="height:80px;" ng-src="/img/trash.png"/>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" aria-valuenow="{{up.getProgress()}}" aria-valuemin="0" aria-valuemax="100" ng-style="{width : ( up.getProgress() + '%' ) }">
+            <span>{{up.getProgress()}}%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="photo-row">
+  <div class="panel panel-default" ng-repeat="picture in up.allPicturesInfo()">
+    <div class="panel-body">
+      <img class="img-responsive" ng-src="{{ picture.path }}" alt="" dd-draggable="true" itemid="{{picture.id}}">
+    </div>
+  </div>
+</div>
